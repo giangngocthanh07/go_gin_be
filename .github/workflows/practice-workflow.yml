@@ -1,8 +1,9 @@
 name: Practice Workflow
 
 on:
-  push:
-    branches: [main]
+    workflow_dispatch: 
+#   push:
+#     branches: [main]
 
 env:
   ABC: "NGOCTHANH"
@@ -42,6 +43,30 @@ jobs:
         if: ${{needs.check.outputs.check_status  == 'success' }}
         run: echo ${{needs.check.outputs.check_status }}
 
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+    
+      - name: create file html final
+        env:
+            REPOSITORY: ${{ github.repository }}
+            REPOSITORY_OWNER: ${{ github.repository_owner }}
+            BRANCH: ${{ github.ref_name }}
+            REF: ${{ github.ref }}
+            COMMIT_SHA: ${{ github.sha }}
+            ACTOR: ${{ github.actor }}
+            WORKFLOW_NAME: ${{ github.workflow }}
+            JOB_NAME: ${{ github.job }}
+            EVENT_NAME: ${{ github.event_name }}
+            RUN_ID: ${{ github.run_id }}
+            RUN_NUMBER: ${{ github.run_number }}
+            RUN_ATTEMPT: ${{ github.run_attempt }}
+            SERVER_URL: ${{ github.server_url }}
+            REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
+            COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+            ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            STATUS: success
+        run: envsubst < email-template.html > email.html
+
       - name: Send mail
         uses: dawidd6/action-send-mail@v19
         with:
@@ -79,4 +104,5 @@ jobs:
           body: Build job of ${{github.repository}} completed successfully!
 
           # Optional HTML body read from file:
-        #   html_body: file://README.html
+          #   html_body: file://README.html
+          #   html_body: file://email.html

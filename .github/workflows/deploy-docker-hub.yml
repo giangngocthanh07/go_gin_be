@@ -1,0 +1,22 @@
+name: Deploy Docker Hub
+on:
+  push:
+    branches: [main]
+env:
+  ABC: 123
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Check Dockerfile
+        run: test -f Dockerfile
+
+      - name: Check env file
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.IP_SERVER_RUN }} "
+          ls -la
+          "
