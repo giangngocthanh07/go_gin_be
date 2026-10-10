@@ -4,6 +4,8 @@ on:
     branches: [main]
 env:
   SSH_SERVER: ${{ secrets.SSH_USER }}@${{ secrets.IP_SERVER_RUN }}
+  WORK_DIR: /home/ubuntu/devops04/go_gin_be
+  COMPOSE_FILE_DIR: /home/ubuntu/devops04
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -26,5 +28,15 @@ jobs:
       - name: Check env file
         run: |
           ssh $SSH_SERVER "
-          ls -la
+            set -e
+            cd $WORK_DIR
+            test -f .env
+          "
+
+      - name: Check Docker Compose file
+        run: |
+          ssh $SSH_SERVER "
+            set -e
+            cd $COMPOSE_FILE_DIR
+            test -f docker-compose.yml
           "
