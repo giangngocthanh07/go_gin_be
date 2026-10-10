@@ -15,5 +15,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7.0.1
 
-      - name: check
-        run: ls -la
+      - name: Check Dockerfile
+        id: check
+        run: |
+            ls -la
+            test -f Dockerfile
+            echo "status=success" >> $GITHUB_OUTPUT
+
+      - name: Show
+        # Gọi lại step trước bằng id
+        run: echo ${{ steps.check.outputs.status }}
