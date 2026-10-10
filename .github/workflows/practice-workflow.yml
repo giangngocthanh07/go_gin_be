@@ -31,10 +31,10 @@ jobs:
         run: echo ${{ steps.check.outputs.status }}
 
   build:
-    # needs: [check]
+    needs: [check]
     runs-on: ubuntu-latest
 
     steps:
       - name: Show
         # Gọi lại step trước bằng id
-        run: echo "123"
+        run: echo ${{needs.check.outputs.check_status}}
