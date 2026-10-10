@@ -105,4 +105,4 @@ jobs:
 
           # Optional HTML body read from file:
           #   html_body: file://README.html
-            html_body: file://email.html
+          html_body: file://email.html
