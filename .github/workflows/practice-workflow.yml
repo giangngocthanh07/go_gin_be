@@ -11,17 +11,30 @@ jobs:
   check:
     runs-on: ubuntu-latest
 
+    outputs:
+      check_status: ${{ steps.check.outputs.status }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7.0.1
 
       - name: Check Dockerfile
         id: check
+        # Xuất ra step
         run: |
-            ls -la
-            test -f Dockerfile
-            echo "status=success" >> $GITHUB_OUTPUT
+          ls -la
+          test -f Dockerfile
+          echo "status=success" >> $GITHUB_OUTPUT
 
       - name: Show
         # Gọi lại step trước bằng id
         run: echo ${{ steps.check.outputs.status }}
+
+  build:
+    # needs: [check]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show
+        # Gọi lại step trước bằng id
+        run: echo "123"
