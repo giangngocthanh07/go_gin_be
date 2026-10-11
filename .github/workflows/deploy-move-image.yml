@@ -1,4 +1,4 @@
-name: Deploy Docker Hub
+name: Deploy Move Image
 on:
   push:
     branches: [main]
