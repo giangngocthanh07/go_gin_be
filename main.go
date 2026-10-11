@@ -36,7 +36,7 @@ func main() {
 	})
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"message": "Hello from Go Gin Web Framework!",
+			"message": "Hello from Go Gin Web Framework! NGOC THANH",
 		})
 	})
 	router.GET("/user", func(c *gin.Context) {

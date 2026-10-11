@@ -1,7 +1,9 @@
 name: Deploy Docker Hub
 on:
-  push:
-    branches: [main]
+  # push:
+  #   branches: [main]
+  workflow_dispatch:
+    
 env:
   SSH_SERVER: ${{ secrets.SSH_USER }}@${{ secrets.IP_SERVER_RUN }}
   WORK_DIR: /home/ubuntu/devops04/go_gin_be
