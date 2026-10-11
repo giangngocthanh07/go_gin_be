@@ -76,7 +76,7 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh $SSH_KEY "
+          ssh $SSH_SERVER "
             set -e
 
             cd $COMPOSE_FILE_DIR
