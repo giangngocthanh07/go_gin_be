@@ -1,7 +1,8 @@
 name: Deploy Move Image
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
 env:
   SSH_SERVER: ${{ secrets.SSH_USER }}@${{ secrets.IP_SERVER_RUN }}
   WORK_DIR: /home/ubuntu/devops04/go_gin_be
