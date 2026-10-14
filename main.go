@@ -19,6 +19,7 @@ func main() {
 	log.Println("DATABASE_URL=", DATABASE_URL)
 	log.Println("GIANG NGOC THANH")
 	log.Println("This is Test 01")
+	log.Println("This is Test 02")
 	log.Println("THIS IS TRIGGERED AUTOMATICALLY")
 	db, _ := sql.Open("postgres", DATABASE_URL)
 
